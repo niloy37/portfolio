@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiMenu, FiX, FiHome, FiUser, FiCode, FiFolderOpen, FiMail } from 'react-icons/fi';
+import { FiMenu, FiX, FiHome, FiUser, FiCode, FiFolder, FiMail } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navigation = () => {
@@ -10,7 +10,7 @@ const Navigation = () => {
     { id: 'hero', label: 'Home', icon: FiHome },
     { id: 'about', label: 'About', icon: FiUser },
     { id: 'skills', label: 'Skills', icon: FiCode },
-    { id: 'projects', label: 'Projects', icon: FiFolderOpen },
+    { id: 'projects', label: 'Projects', icon: FiFolder },
     { id: 'contact', label: 'Contact', icon: FiMail },
   ];
 
