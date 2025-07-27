@@ -27,7 +27,7 @@ const Projects = () => {
           alt={project.title}
           className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
           onError={(e) => {
-            e.target.src = `https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop&crop=entropy&auto=format&fm=webp&q=80`;
+            (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop&crop=entropy&auto=format&fm=webp&q=80`;
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -123,7 +123,7 @@ const Projects = () => {
             alt={project.title}
             className="w-full h-64 object-cover rounded-t-xl"
             onError={(e) => {
-              e.target.src = `https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop&crop=entropy&auto=format&fm=webp&q=80`;
+              (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop&crop=entropy&auto=format&fm=webp&q=80`;
             }}
           />
           <button
