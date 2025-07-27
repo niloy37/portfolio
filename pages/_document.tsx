@@ -8,7 +8,7 @@ export default function Document() {
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content="#1e3a8a" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
       </Head>
       <body className="bg-gray-900 text-white">
         <Main />
