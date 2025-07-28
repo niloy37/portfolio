@@ -2,16 +2,16 @@ export const personalInfo = {
   name: "Niloy Rahman",
   title: "MSc Computational Sciences",
   subtitle: "AI & Deep Learning Specialist",
-  email: "niloy.rahman@example.com", // Update with your actual email
-  phone: "+1 (555) 123-4567", // Update with your actual phone
-  location: "Location", // Update with your location
+  email: "niloyrahman1337@gmail.com", // Update with your actual email
+  phone: "7059219299", // Update with your actual phone
+  location: "Ontario, Canada", // Update with your location
   bio: "Passionate MSc student in Computational Sciences with deep expertise in Natural Language Processing, Retrieval-Augmented Generation (RAG), and deep learning. Specialized in hyperparameter tuning and model optimization to push the boundaries of AI performance.",
   resume: "/assets/resume.pdf",
   
   social: {
     github: "https://github.com/niloy37",
     linkedin: "https://www.linkedin.com/in/niloy18/", // Update with your actual LinkedIn
-    email: "mailto:niloy.rahman@example.com", // Update with your actual email
+    email: "mailto:niloyrahman1337@gmail.com", // Update with your actual email
     twitter: "https://twitter.com/niloy37", // Optional - add if you have one
   },
   
