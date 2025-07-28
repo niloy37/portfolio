@@ -25,9 +25,8 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      // Replace 'YOUR_FORM_ID' with your actual Formspree form ID
-      // Example: https://formspree.io/f/xvoeqpwl
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      // Formspree endpoint updated with actual form ID
+      const response = await fetch('https://formspree.io/f/movlwlno', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
