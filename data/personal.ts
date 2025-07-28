@@ -10,7 +10,7 @@ export const personalInfo = {
   
   social: {
     github: "https://github.com/niloy37",
-    linkedin: "https://linkedin.com/in/niloy-rahman", // Update with your actual LinkedIn
+    linkedin: "https://www.linkedin.com/in/niloy18/", // Update with your actual LinkedIn
     email: "mailto:niloy.rahman@example.com", // Update with your actual email
     twitter: "https://twitter.com/niloy37", // Optional - add if you have one
   },
