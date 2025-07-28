@@ -31,7 +31,6 @@ export const projects = [
     featured: true,
     links: {
       github: "https://github.com/niloy37/rag-chatbot",
-      demo: "https://rag-chatbot-demo.streamlit.app"
     },
     highlights: [
       "Implemented RAG architecture",
@@ -41,83 +40,83 @@ export const projects = [
     ]
   },
   {
-    id: 3,
-    title: "Hyperparameter Optimization Framework",
-    description: "Automated framework for hyperparameter tuning using Bayesian optimization and genetic algorithms to maximize model performance.",
-    longDescription: "A comprehensive framework that automates the hyperparameter optimization process for deep learning models. Uses advanced optimization techniques including Bayesian optimization, genetic algorithms, and grid search to find optimal hyperparameters.",
-    image: "/assets/projects/hyperparam-optimizer.jpg",
-    technologies: ["Python", "Optuna", "PyTorch", "Scikit-learn", "MLflow", "Ray Tune"],
-    category: "Model Optimization",
-    featured: true,
-    links: {
-      github: "https://github.com/niloy37/hyperparam-optimizer",
-      docs: "https://hyperparam-docs.netlify.app"
-    },
-    highlights: [
-      "Bayesian optimization implementation",
-      "Multi-objective optimization",
-      "Automated experiment tracking",
-      "Parallel hyperparameter search"
-    ]
+  id: 3,
+  title: "Resume Parser with NLP",
+  description: "Smart resume screening system combining advanced NLP with a rule‑based inference engine for explainable candidate evaluation.",
+  longDescription: "Built a comprehensive resume parsing framework that leverages spaCy for named entity recognition and contextual skill extraction, alongside a custom rule‑based inference engine. The system processes PDFs, DOCX, and TXTs to produce HIRE/CONSIDER/REJECT decisions with confidence scores and human‑readable explanations, all within a responsive glassmorphism UI.",
+  image: "/assets/projects/resume-parser.jpg",
+  technologies: ["Python", "NLP", "spaCy", "Flask", "JavaScript", "HTML/CSS"],
+  category: "Knowledge Representation",
+  featured: true,
+  links: {
+    github: "https://github.com/niloy37/resume-parser/tree/master",
+    docs: "https://www.linkedin.com/feed/update/urn:li:activity:7353819262479712257/"
   },
+  highlights: [
+    "spaCy-powered named entity recognition for skills & experience extraction",
+    "Custom rule-based inference engine for transparent decision logic",
+    "Confidence scoring with detailed, human-readable explanations",
+    "Responsive glassmorphism UI with drag-and-drop resume upload"
+  ]
+},
+{
+  id: 4,
+  title: "CharitAble – Donation & Fundraising Prototype",
+  description: "Solo‑built PHP/MySQL prototype for user registration, campaign posting, and donation tracking.",
+  longDescription: "Developed as a junior‑year project using raw PHP and MySQL. Implements user authentication (register/login), campaign creation, donation processing, user profiles, and detailed donation logs—all in a clean, functional prototype.",
+  image: "/assets/projects/cv-pipeline.jpg",
+  technologies: ["PHP", "MySQL", "HTML", "CSS", "JavaScript"],
+  category: "Web Development",
+  featured: false,
+  links: {
+    github: "https://github.com/niloy37/Donation-and-Fundraising-WebsiteA"
+  },
+  highlights: [
+    "Custom PHP user auth (registration & login)",
+    "MySQL-backed campaign CRUD operations",
+    "Donation processing with per-user logs",
+    "Solo implementation showcasing end-to-end prototype"
+  ]
+},
+
   {
-    id: 4,
-    title: "Computer Vision Pipeline",
-    description: "End-to-end computer vision pipeline for object detection and classification with real-time processing capabilities.",
-    longDescription: "A production-ready computer vision system that handles image preprocessing, object detection, classification, and post-processing. Optimized for real-time performance with GPU acceleration.",
-    image: "/assets/projects/cv-pipeline.jpg",
-    technologies: ["Python", "OpenCV", "YOLO", "PyTorch", "CUDA", "FastAPI"],
-    category: "Computer Vision",
-    featured: false,
-    links: {
-      github: "https://github.com/niloy37/cv-pipeline",
-      api: "https://cv-api.herokuapp.com"
-    },
-    highlights: [
-      "Real-time object detection",
-      "GPU-accelerated processing",
-      "RESTful API interface",
-      "Scalable architecture"
-    ]
+  id: 5,
+  title: "Unity Carrom Board Game",
+  description: "Physics‑based digital Carrom game with single‑player AI and local multiplayer support.",
+  longDescription: "Built solo in Unity using C#, this Carrom board game prototype features realistic physics simulation, customizable player skins, and both AI opponent and local multiplayer modes. Implements smooth turn‑based mechanics, camera controls, and dynamic sound effects for an immersive experience.",
+  image: "/assets/projects/nlp-dashboard.jpg",
+  technologies: ["C#", "Unity", "Unity Physics", "UI Toolkit"],
+  category: "Game Development",
+  featured: false,
+  links: {
+    github: "https://github.com/niloy37/unity-carrom"
   },
-  {
-    id: 5,
-    title: "NLP Text Analytics Dashboard",
-    description: "Interactive dashboard for text analytics including sentiment analysis, entity recognition, and topic modeling with visualization.",
-    longDescription: "A comprehensive text analytics platform that provides insights into textual data through various NLP techniques. Features interactive visualizations and real-time analysis capabilities.",
-    image: "/assets/projects/nlp-dashboard.jpg",
-    technologies: ["Python", "Streamlit", "spaCy", "NLTK", "Plotly", "Transformers"],
-    category: "Natural Language Processing",
-    featured: false,
-    links: {
-      github: "https://github.com/niloy37/nlp-dashboard",
-      demo: "https://nlp-analytics.streamlit.app"
-    },
-    highlights: [
-      "Multi-language support",
-      "Real-time sentiment analysis",
-      "Interactive visualizations",
-      "Named entity recognition"
-    ]
-  },
+  highlights: [
+    "Custom Carrom physics simulation",
+    "Single‑player AI with adjustable difficulty",
+    "Local multiplayer on same device",
+    "C# scripts for turn management and UI controls"
+  ]
+},
+
   {
     id: 6,
-    title: "Deep Learning Model Compression",
-    description: "Research project on neural network compression techniques including pruning, quantization, and knowledge distillation.",
-    longDescription: "An in-depth research project exploring various model compression techniques to reduce the size and computational requirements of deep neural networks while maintaining performance.",
+    title: "Custom CNN for Chest X-ray Disease Classification (Thesis)",
+    description: "Thesis project: Built and fine-tuned a custom CNN to classify 11 chest X-ray findings (COPD, Scoliosis, Air Trapping, etc.) on the PadChest dataset, achieving 96% accuracy.",
+    longDescription: "Developed a deep learning pipeline for multi-class classification of chest X-ray images, focusing on 11 clinical findings including COPD Signs, Scoliosis, Air Trapping, Aortic Elongation, Pleural Effusion, Laminar Atelectasis, Callus Rib Fractures, Kyphosis, Hiatal Hernia, Vascular Hilar Enlargement, and Calcified Granuloma. The project involved extensive dataset cleaning, preprocessing, and hyperparameter tuning. Trained and compared multiple state-of-the-art models alongside a custom CNN, achieving 96% accuracy on the PadChest dataset.",
     image: "/assets/projects/model-compression.jpg",
-    technologies: ["Python", "PyTorch", "TensorFlow Lite", "ONNX", "Jupyter"],
+    technologies: ["Python", "PyTorch", "CNN", "PadChest Dataset", "Jupyter", "scikit-learn"],
     category: "Research",
     featured: false,
     links: {
-      github: "https://github.com/niloy37/model-compression",
-      paper: "https://arxiv.org/abs/example-paper"
+      github: "https://github.com/niloy37/Thesis"
     },
     highlights: [
-      "90% model size reduction",
-      "Maintained 95% accuracy",
-      "Multiple compression techniques",
-      "Comprehensive benchmarking"
+      "Custom CNN architecture for 11 chest X-ray findings",
+      "PadChest dataset cleaning and preprocessing",
+      "Hyperparameter tuning and model comparison",
+      "Achieved 96% classification accuracy",
+      "Extensive evaluation on real-world clinical data"
     ]
   }
 ];
@@ -128,5 +127,8 @@ export const projectCategories = [
   "Natural Language Processing", 
   "Computer Vision",
   "Model Optimization",
-  "Research"
+  "Research",
+  "Web Development",
+  "Knowledge Representation",
+  "Game Development"
 ];
