@@ -29,16 +29,16 @@ export const personalInfo = {
 
 export const experience = [
   {
-    title: "Research Assistant",
-    company: "University Research Lab",
-    period: "2023 - Present",
+    title: "Research Intern",
+    company: "NexNet Research lab",
+    period: "2025 - Present",
     description: "Leading research in NLP and RAG systems, focusing on optimization techniques and novel architectures.",
     technologies: ["Python", "PyTorch", "Transformers", "RAG", "CUDA"]
   },
   {
-    title: "AI Engineering Intern", 
-    company: "Tech Company",
-    period: "2022 - 2023",
+    title: "Machine Learning Intern", 
+    company: "Sequencr AI",
+    period: "2025",
     description: "Developed and optimized deep learning models for production environments.",
     technologies: ["TensorFlow", "Keras", "MLOps", "Docker", "AWS"]
   }
@@ -48,7 +48,7 @@ export const education = [
   {
     degree: "MSc Computational Sciences",
     school: "Laurentian University", // Update with your university
-    period: "2022 - 2024",
+    period: "2024 - 2025",
     description: "Specialized in AI, machine learning, and computational methods with focus on deep learning applications."
   },
   {
