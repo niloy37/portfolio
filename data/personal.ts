@@ -29,18 +29,18 @@ export const personalInfo = {
 
 export const experience = [
   {
-    title: "Research Intern",
-    company: "NexNet Research lab",
-    period: "2025 - Present",
-    description: "Leading research in NLP and RAG systems, focusing on optimization techniques and novel architectures.",
-    technologies: ["Python", "PyTorch", "Transformers", "RAG", "CUDA"]
+    title: "Research Assistant (Intern)",
+    company: "NeXNet Research Lab – Laurentian University",
+    period: "Sept 2025 - Present",
+    description: "Contributed to applied research in LLM faithfulness of attention under Dr. Williams, conducted literature reviews, assisted with data preprocessing, and collaborated on research papers.",
+    technologies: ["Python", "LLM", "Research", "Data Processing"]
   },
   {
-    title: "Machine Learning Intern", 
+    title: "Intern – Machine Learning Engineer", 
     company: "Sequencr AI",
-    period: "2025",
-    description: "Developed and optimized deep learning models for production environments.",
-    technologies: ["TensorFlow", "Keras", "MLOps", "Docker", "AWS"]
+    period: "June 2025 - Aug 2025",
+    description: "Designed and deployed ML pipelines for Generative AI applications, built clustering systems with HDBSCAN and embeddings, optimized models with scikit-learn and TensorFlow, and delivered CI/CD pipelines.",
+    technologies: ["Python", "scikit-learn", "TensorFlow", "HDBSCAN", "Embeddings", "CI/CD"]
   }
 ];
 
