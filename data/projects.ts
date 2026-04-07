@@ -10,7 +10,7 @@ export const projects = [
     featured: true,
     links: {
       live: "https://recommendersystempython-niloy37.streamlit.app",
-      github: "https://github.com/niloy37/recommender-system",
+      github: "https://github.com/niloy37/RecommenderSystemPython",
       demo: "https://recommendersystempython-niloy37.streamlit.app"
     },
     highlights: [
@@ -23,20 +23,21 @@ export const projects = [
   {
     id: 2,
     title: "RAG-Enhanced Chatbot",
-    description: "Retrieval-Augmented Generation chatbot that combines large language models with dynamic knowledge retrieval for accurate, context-aware responses.",
-    longDescription: "An advanced conversational AI system that implements Retrieval-Augmented Generation (RAG) to provide accurate, contextual responses by combining the power of large language models with real-time information retrieval from curated knowledge bases.",
+    description: "Advanced RAG chatbot powered by Gemini 2.5 Pro with embeddings stored in Pinecone for real-time semantic search and context-aware responses.",
+    longDescription: "An advanced conversational AI system that implements Retrieval-Augmented Generation (RAG) using Google's Gemini 2.5 Pro as the foundation model. Embeddings are stored in Pinecone's vector database, enabling efficient semantic search and retrieval of relevant knowledge to provide accurate, contextual responses combined with the power of large language models.",
     image: "/assets/projects/rag-chatbot.jpg",
-    technologies: ["Python", "LangChain", "OpenAI GPT", "Vector DB", "FAISS", "Streamlit"],
+    technologies: ["Python", "LangChain", "Gemini 2.5 Pro", "Pinecone", "Vector DB", "Streamlit"],
     category: "Natural Language Processing",
     featured: true,
     links: {
-      github: "https://github.com/niloy37/rag-chatbot",
+      live: "https://www.linkedin.com/posts/niloy18_ai-rag-openai-activity-7374974465614602240-P2lM?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADien1gBEbtsxG8CDrRd0mNwegEkpff8IV4",
+      github: "https://github.com/niloy37/chatbotAI"
     },
     highlights: [
-      "Implemented RAG architecture",
-      "Vector database integration",
-      "Real-time knowledge retrieval",
-      "Context-aware responses"
+      "Implemented RAG architecture with Gemini 2.5 Pro",
+      "Pinecone vector database for embeddings",
+      "Real-time semantic search and retrieval",
+      "Context-aware conversational responses"
     ]
   },
   {
@@ -49,6 +50,7 @@ export const projects = [
   category: "Knowledge Representation",
   featured: true,
   links: {
+    live: "https://www.linkedin.com/posts/niloy18_ai-nlp-knowledgerepresentation-activity-7353819262479712257-1Ybr?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADien1gBEbtsxG8CDrRd0mNwegEkpff8IV4",
     github: "https://github.com/niloy37/resume-parser/tree/master",
     docs: "https://www.linkedin.com/feed/update/urn:li:activity:7353819262479712257/"
   },
@@ -117,6 +119,27 @@ export const projects = [
       "Hyperparameter tuning and model comparison",
       "Achieved 96% classification accuracy",
       "Extensive evaluation on real-world clinical data"
+    ]
+  },
+  {
+    id: 7,
+    title: "MLOps End to End pipeline Real Time DDOS Detection system",
+    description: "Real-time DDOS attack detection system using XGBoost with network traffic analysis, achieving 99% accuracy on the CIC-IDS2019 dataset.",
+    longDescription: "An end-to-end machine learning pipeline for detecting distributed denial-of-service (DDOS) attacks in real-time. Built with XGBoost trained on the CIC-IDS2019 dataset achieving 99% accuracy, combined with a Flask web dashboard that captures live network traffic via tshark. The system extracts 80 network flow features per flow (packet counts, timing metrics, TCP flags, etc.) and runs predictions with sub-millisecond latency. Features an interactive dashboard displaying IP addresses, protocols, predictions, and confidence scores with batch processing for efficient inference.",
+    image: "/assets/projects/ddos-detection.jpg",
+    technologies: ["XGBoost", "Python", "Flask", "scikit-learn", "tshark", "Bootstrap", "CIC-IDS2019"],
+    category: "Machine Learning",
+    featured: true,
+    links: {
+      github: "https://github.com/niloy37/ddos-detection-XGboost",
+      live: "https://www.linkedin.com/posts/niloy18_machinelearning-cybersecurity-xgboost-activity-7394524123223289856-MUMM?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADien1gBEbtsxG8CDrRd0mNwegEkpff8IV4"
+    },
+    highlights: [
+      "XGBoost classifier achieving 99% accuracy on CIC-IDS2019 dataset",
+      "Real-time network traffic capture via tshark",
+      "80 network flow features extraction per flow",
+      "Sub-millisecond prediction latency",
+      "Interactive Flask dashboard with batch processing"
     ]
   }
 ];
