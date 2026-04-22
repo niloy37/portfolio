@@ -1,0 +1,21 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" rx="64" fill="#07111E"/>
+  <rect x="18" y="18" width="220" height="220" rx="46" stroke="url(#stroke)" stroke-width="4"/>
+  <circle cx="78" cy="84" r="38" fill="url(#haloOne)" fill-opacity="0.85"/>
+  <circle cx="186" cy="186" r="42" fill="url(#haloTwo)" fill-opacity="0.7"/>
+  <path d="M76 176V82H106L154 146V82H180V176H150L102 112V176H76Z" fill="#F5F8FF"/>
+  <defs>
+    <linearGradient id="stroke" x1="40" y1="30" x2="220" y2="228" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#54D9E8"/>
+      <stop offset="1" stop-color="#EFB256"/>
+    </linearGradient>
+    <radialGradient id="haloOne" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(78 84) rotate(90) scale(38)">
+      <stop stop-color="#54D9E8"/>
+      <stop offset="1" stop-color="#54D9E8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="haloTwo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(186 186) rotate(90) scale(42)">
+      <stop stop-color="#DE8A1D"/>
+      <stop offset="1" stop-color="#DE8A1D" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

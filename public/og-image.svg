@@ -1,0 +1,35 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#07111E"/>
+  <g opacity="0.45">
+    <path d="M0 0H1200V630H0V0Z" fill="url(#gridGlow)"/>
+    <path d="M0 0H1200V630H0V0Z" fill="url(#gridMask)"/>
+  </g>
+  <circle cx="178" cy="136" r="132" fill="url(#haloOne)"/>
+  <circle cx="1060" cy="504" r="166" fill="url(#haloTwo)"/>
+  <rect x="72" y="84" width="1056" height="462" rx="40" fill="#080E1A" fill-opacity="0.68" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <text x="118" y="208" fill="#8DF4FF" font-family="IBM Plex Mono, monospace" font-size="24" letter-spacing="0.34em">NILOY RAHMAN</text>
+  <text x="118" y="308" fill="#F5F8FF" font-family="Sora, sans-serif" font-size="68" font-weight="700">AI/ML Engineer for</text>
+  <text x="118" y="392" fill="#F5F8FF" font-family="Sora, sans-serif" font-size="68" font-weight="700">LLM Systems and Applied Research</text>
+  <text x="118" y="468" fill="#A8B4C8" font-family="Manrope, sans-serif" font-size="28">
+    RAG, NLP, computer vision, benchmarking, and production-minded ML delivery.
+  </text>
+  <rect x="118" y="500" width="236" height="48" rx="24" fill="#54D9E8" fill-opacity="0.12" stroke="#54D9E8" stroke-opacity="0.26"/>
+  <text x="154" y="531" fill="#F5F8FF" font-family="Manrope, sans-serif" font-size="22" font-weight="700">Research + shipping mindset</text>
+  <defs>
+    <radialGradient id="haloOne" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(178 136) rotate(90) scale(132)">
+      <stop stop-color="#54D9E8" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#54D9E8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="haloTwo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1060 504) rotate(90) scale(166)">
+      <stop stop-color="#DE8A1D" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#DE8A1D" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gridGlow" x1="80" y1="0" x2="1120" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#54D9E8" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#D64562" stop-opacity="0.14"/>
+    </linearGradient>
+    <pattern id="gridMask" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" stroke="#FFFFFF" stroke-opacity="0.08"/>
+    </pattern>
+  </defs>
+</svg>

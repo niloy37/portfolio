@@ -1,204 +1,202 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiMail, FiDownload } from 'react-icons/fi';
-import { TypeAnimation } from 'react-type-animation';
+import { useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { FiArrowDownRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 import { personalInfo } from '@/data/personal';
 
 const Hero = () => {
-  const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
 
-  const scrollToProjects = () => {
-    const element = document.getElementById('projects');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0.25]);
+  const asideY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const haloShift = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const hoverLift = shouldReduceMotion ? undefined : { y: -6, scale: 1.02 };
+  const linkHover = shouldReduceMotion ? undefined : { x: 8, y: -2 };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20"></div>
-      <div className="absolute inset-0 bg-[url('/assets/grid.svg')] opacity-10"></div>
-      
-      {/* Floating Elements */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-8"
-        >
-          {/* Greeting */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg sm:text-xl text-blue-400 font-medium"
-          >
-            Hello, I'm
-          </motion.p>
+    <section id="hero" ref={sectionRef} className="relative overflow-hidden pt-28">
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-[-8%] top-[-4rem] h-[34rem] rounded-full bg-[radial-gradient(circle,_rgba(84,217,232,0.18)_0%,_rgba(84,217,232,0.02)_55%,_transparent_75%)] blur-3xl"
+        style={shouldReduceMotion ? undefined : { y: haloShift }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[-12%] top-[18%] h-80 w-80 rounded-full bg-[radial-gradient(circle,_rgba(222,138,29,0.16)_0%,_rgba(222,138,29,0.04)_52%,_transparent_74%)] blur-3xl"
+        style={shouldReduceMotion ? undefined : { y: asideY }}
+      />
 
-          {/* Name */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-hero gradient-text leading-tight"
-          >
-            {personalInfo.name}
-          </motion.h1>
-
-          {/* Dynamic Title */}
+      <div className="section-shell pb-20 pt-10">
+        <div className="grid items-end gap-10 xl:grid-cols-[minmax(0,1.12fr)_minmax(300px,0.88fr)]">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-xl sm:text-2xl lg:text-3xl text-gray-300 h-20 flex items-center justify-center"
-          >
-            <TypeAnimation
-              sequence={[
-                'MSc Computational Sciences Student',
-                2000,
-                'AI & Deep Learning Specialist',
-                2000,
-                'NLP Researcher',
-                2000,
-                'Model Optimization Expert',
-                2000,
-                'RAG Systems Developer',
-                2000,
-              ]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-              className="text-white"
-            />
-          </motion.div>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="max-w-3xl mx-auto text-lg sm:text-xl text-gray-300 leading-relaxed"
-          >
-            {personalInfo.bio}
-          </motion.p>
-
-          {/* Interests Tags */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
-            className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto"
-          >
-            {personalInfo.interests.slice(0, 6).map((interest, index) => (
-              <span
-                key={interest}
-                className="px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-sm font-medium text-gray-300 hover:bg-white/20 transition-all duration-300"
-              >
-                {interest}
-              </span>
-            ))}
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <button
-              onClick={scrollToProjects}
-              className="btn-primary group"
-            >
-              <span>View My Work</span>
-              <motion.div
-                className="ml-2 group-hover:translate-x-1 transition-transform"
-                initial={{ x: 0 }}
-                whileHover={{ x: 5 }}
-              >
-                →
-              </motion.div>
-            </button>
-            
-            <button
-              onClick={scrollToContact}
-              className="btn-secondary"
-            >
-              Get In Touch
-            </button>
-            
-            <a
-              href={personalInfo.resume}
-              download
-              className="flex items-center space-x-2 px-6 py-3 bg-transparent border border-gray-500 text-gray-300 hover:bg-gray-500 hover:text-white rounded-lg transition-all duration-300"
-            >
-              <FiDownload size={18} />
-              <span>Resume</span>
-            </a>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.3 }}
-            className="flex justify-center space-x-6"
-          >
-            <a
-              href={personalInfo.social.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
-            >
-              <FiGithub size={24} />
-            </a>
-            <a
-              href={personalInfo.social.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
-            >
-              <FiLinkedin size={24} />
-            </a>
-            <a
-              href={personalInfo.social.email}
-              className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
-            >
-              <FiMail size={24} />
-            </a>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center"
+            className="space-y-8"
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+            animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={shouldReduceMotion ? undefined : { duration: 0.7, ease: 'easeOut' }}
+            style={shouldReduceMotion ? undefined : { y: contentY, opacity: contentOpacity }}
           >
             <motion.div
-              animate={{ y: [0, 16, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1 h-2 bg-gray-400 rounded-full mt-2"
-            />
+              className="eyebrow"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
+              animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={shouldReduceMotion ? undefined : { duration: 0.45, delay: 0.05 }}
+            >
+              Balanced AI engineering and research portfolio
+            </motion.div>
+
+            <motion.div
+              className="space-y-5"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+              animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={shouldReduceMotion ? undefined : { duration: 0.55, delay: 0.12 }}
+            >
+              <p className="max-w-2xl text-sm uppercase tracking-[0.32em] text-slate-400">
+                {personalInfo.name}
+              </p>
+              <h1 className="display-title max-w-4xl">{personalInfo.headline}</h1>
+              <p className="max-w-3xl text-lg leading-8 text-slate-300 md:text-xl">
+                {personalInfo.subtitle}
+              </p>
+            </motion.div>
+
+            <div className="flex flex-wrap gap-3">
+              {personalInfo.focusAreas.map((area, index) => (
+                <motion.span
+                  key={area}
+                  className="chip"
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+                  animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                  transition={
+                    shouldReduceMotion
+                      ? undefined
+                      : { duration: 0.35, delay: 0.2 + index * 0.04 }
+                  }
+                  whileHover={hoverLift}
+                >
+                  {area}
+                </motion.span>
+              ))}
+            </div>
+
+            <motion.div
+              className="flex flex-col gap-4 sm:flex-row sm:flex-wrap"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+              animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={shouldReduceMotion ? undefined : { duration: 0.45, delay: 0.28 }}
+            >
+              <a href="#projects" className="button-primary">
+                Explore selected work
+                <FiArrowDownRight />
+              </a>
+              <a href="#contact" className="button-secondary">
+                Start a conversation
+              </a>
+              <a href={personalInfo.resume} download="Niloy-Rahman-Resume.pdf" className="button-ghost">
+                Download resume
+              </a>
+            </motion.div>
+
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              {personalInfo.proofStrip.map((item, index) => (
+                <motion.div
+                  key={item.label}
+                  className="metric-card"
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
+                  animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                  transition={
+                    shouldReduceMotion
+                      ? undefined
+                      : { duration: 0.45, delay: 0.34 + index * 0.05 }
+                  }
+                  whileHover={hoverLift}
+                >
+                  <span className="text-xs uppercase tracking-[0.22em] text-slate-400">
+                    {item.label}
+                  </span>
+                  <p className="mt-3 text-sm font-semibold leading-6 text-white">{item.value}</p>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
-        </motion.div>
+
+          <motion.aside
+            className="hero-card"
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
+            animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={shouldReduceMotion ? undefined : { duration: 0.7, delay: 0.18 }}
+            style={shouldReduceMotion ? undefined : { y: asideY }}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Currently</p>
+                <h2 className="mt-3 font-display text-2xl text-white">
+                  Researching LLM faithfulness while shipping applied AI demos
+                </h2>
+              </div>
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.22em] text-signal-300">
+                {personalInfo.location}
+              </span>
+            </div>
+
+            <div className="mt-8 space-y-4">
+              {personalInfo.bio.map((paragraph) => (
+                <p key={paragraph} className="text-base leading-7 text-slate-300">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-3 xl:grid-cols-1">
+              <motion.a
+                href={personalInfo.socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero-link-card"
+                whileHover={linkHover}
+              >
+                <FiGithub size={18} />
+                <span>GitHub</span>
+              </motion.a>
+              <motion.a
+                href={personalInfo.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero-link-card"
+                whileHover={linkHover}
+              >
+                <FiLinkedin size={18} />
+                <span>LinkedIn</span>
+              </motion.a>
+              <motion.a
+                href={personalInfo.socials.email}
+                className="hero-link-card"
+                whileHover={linkHover}
+              >
+                <FiMail size={18} />
+                <span>Email</span>
+              </motion.a>
+            </div>
+
+            <motion.div
+              className="mt-8 rounded-[28px] border border-white/10 bg-black/20 p-5"
+              whileHover={hoverLift}
+            >
+              <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Positioning</p>
+              <p className="mt-3 text-sm leading-6 text-slate-300">{personalInfo.availability}</p>
+            </motion.div>
+          </motion.aside>
+        </div>
+
+        <div className="mt-16 flex items-center gap-4 text-sm text-slate-400">
+          <span className="h-px flex-1 bg-white/10" />
+          <span className="uppercase tracking-[0.28em]">Scroll to follow the story</span>
+          <span className="h-px flex-1 bg-white/10" />
+        </div>
       </div>
     </section>
   );

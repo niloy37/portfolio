@@ -1,164 +1,100 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { skillCategories, certifications, achievements } from '@/data/skills';
+import { motion, useReducedMotion } from 'framer-motion';
+import { skillClusters, toolbelt, workingStyle } from '@/data/skills';
 
 const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
+  const hoverLift = shouldReduceMotion ? undefined : { y: -8, scale: 1.01 };
 
   return (
-    <section id="skills" className="section-padding">
-      <div className="container-width">
+    <section id="skills" className="section-block">
+      <div className="section-shell space-y-12">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          className="max-w-3xl"
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={shouldReduceMotion ? undefined : { duration: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
         >
-          <h2 className="text-section-title gradient-text mb-6">Skills & Expertise</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            A comprehensive overview of my technical skills, certifications, and achievements
+          <div className="eyebrow">Toolkit</div>
+          <h2 className="section-title mt-4">
+            What I reach for when the work needs to move from idea to implementation.
+          </h2>
+          <p className="section-copy mt-5">
+            The strongest through-line in my work is not a single framework. It is the ability to
+            connect research questions, clean pipelines, and usable interfaces into one coherent
+            system.
           </p>
         </motion.div>
 
-        {/* Skill Categories Navigation */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-2 mb-12"
-        >
-          {skillCategories.map((category, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveCategory(index)}
-              className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-                activeCategory === index
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
-              }`}
-            >
-              {category.title}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Active Category Skills */}
-        <motion.div
-          key={activeCategory}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
-        >
-          {skillCategories[activeCategory].skills.map((skill, index) => (
+        <div className="grid gap-5 lg:grid-cols-2 2xl:grid-cols-4">
+          {skillClusters.map((cluster, index) => (
             <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.1 }}
-              className="card hover-glow"
+              key={cluster.title}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="surface-card h-full"
+              whileHover={hoverLift}
             >
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center space-x-3">
-                  <span className="text-2xl">{skill.icon}</span>
-                  <h3 className="text-lg font-semibold text-white">{skill.name}</h3>
-                </div>
-                <span className="text-sm text-gray-400">{skill.level}%</span>
-              </div>
-              
-              {/* Progress Bar */}
-              <div className="w-full bg-gray-700 rounded-full h-2">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${skill.level}%` }}
-                  transition={{ duration: 1, delay: index * 0.1 }}
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full"
-                />
+              <p className="text-xs uppercase tracking-[0.22em] text-slate-400">{cluster.title}</p>
+              <p className="mt-4 text-sm leading-6 text-slate-300">{cluster.summary}</p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {cluster.items.map((item) => (
+                  <span key={item} className="chip chip--muted">
+                    {item}
+                  </span>
+                ))}
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Certifications and Achievements */}
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Certifications */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-subsection-title text-white mb-8 text-center lg:text-left">
-              Certifications
-            </h3>
-            <div className="space-y-4">
-              {certifications.map((cert, index) => (
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)]">
+          <div className="surface-card">
+            <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Toolbelt</p>
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
+              {toolbelt.map((group, index) => (
                 <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2 }}
-                  viewport={{ once: true }}
-                  className="card hover-glow"
+                  key={group.label}
+                  className="rounded-[24px] border border-white/8 bg-black/15 p-5"
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
+                  whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                  transition={shouldReduceMotion ? undefined : { duration: 0.4, delay: index * 0.05 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  whileHover={hoverLift}
                 >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-white mb-1">{cert.name}</h4>
-                      <p className="text-blue-400 text-sm mb-2">{cert.issuer}</p>
-                      <p className="text-gray-400 text-sm">{cert.date}</p>
-                    </div>
-                    <a
-                      href={cert.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-400 hover:text-blue-300 text-sm"
-                    >
-                      Verify →
-                    </a>
+                  <h3 className="text-base font-semibold text-white">{group.label}</h3>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <span key={item} className="chip">
+                        {item}
+                      </span>
+                    ))}
                   </div>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          {/* Achievements */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-subsection-title text-white mb-8 text-center lg:text-left">
-              Achievements
-            </h3>
-            <div className="space-y-4">
-              {achievements.map((achievement, index) => (
+          <div className="surface-card">
+            <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Working style</p>
+            <div className="mt-6 space-y-4">
+              {workingStyle.map((point, index) => (
                 <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2 }}
-                  viewport={{ once: true }}
-                  className="card hover-glow"
+                  key={point}
+                  className="rounded-[24px] border border-white/8 bg-black/15 p-5"
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
+                  whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                  transition={shouldReduceMotion ? undefined : { duration: 0.4, delay: index * 0.06 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  whileHover={hoverLift}
                 >
-                  <div className="flex items-start space-x-4">
-                    <span className="text-3xl">{achievement.icon}</span>
-                    <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-white mb-1">
-                        {achievement.title}
-                      </h4>
-                      <p className="text-gray-300 text-sm mb-2">
-                        {achievement.description}
-                      </p>
-                      <p className="text-gray-400 text-xs">{achievement.date}</p>
-                    </div>
-                  </div>
+                  <p className="text-sm leading-7 text-slate-300">{point}</p>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

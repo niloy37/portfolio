@@ -1,117 +1,75 @@
-export const skillCategories = [
+export const skillClusters = [
   {
-    title: "Programming Languages",
-    skills: [
-      { name: "Python", level: 95, icon: "🐍" },
-      { name: "JavaScript", level: 85, icon: "🟨" },
-      { name: "TypeScript", level: 80, icon: "🔷" },
-      { name: "R", level: 75, icon: "📊" },
-      { name: "SQL", level: 85, icon: "🗃️" },
-      { name: "C++", level: 70, icon: "⚡" }
-    ]
+    title: 'Applied AI and ML',
+    summary: 'Modeling experience across NLP, computer vision, classical ML, and deep learning workflows.',
+    items: [
+      'Machine Learning',
+      'Deep Learning',
+      'Computer Vision',
+      'Natural Language Processing',
+      'Multimodal AI',
+      'Model Evaluation',
+    ],
   },
   {
-    title: "AI & Machine Learning",
-    skills: [
-      { name: "Deep Learning", level: 90, icon: "🧠" },
-      { name: "Natural Language Processing", level: 95, icon: "💬" },
-      { name: "Computer Vision", level: 85, icon: "👁️" },
-      { name: "RAG Systems", level: 90, icon: "🔍" },
-      { name: "Model Optimization", level: 88, icon: "⚙️" },
-      { name: "Hyperparameter Tuning", level: 92, icon: "🎛️" }
-    ]
+    title: 'Generative AI Systems',
+    summary: 'Hands-on work with LLM-powered products, retrieval pipelines, and agentic workflows.',
+    items: [
+      'LLMs',
+      'Prompt Engineering',
+      'RAG',
+      'Agentic AI',
+      'LangChain',
+      'Fine-tuning',
+    ],
   },
   {
-    title: "Frameworks & Libraries",
-    skills: [
-      { name: "PyTorch", level: 90, icon: "🔥" },
-      { name: "TensorFlow", level: 85, icon: "🧮" },
-      { name: "Scikit-learn", level: 90, icon: "🔬" },
-      { name: "Transformers", level: 88, icon: "🤖" },
-      { name: "LangChain", level: 85, icon: "⛓️" },
-      { name: "OpenCV", level: 80, icon: "📷" },
-      { name: "Pandas", level: 95, icon: "🐼" },
-      { name: "NumPy", level: 95, icon: "🔢" }
-    ]
+    title: 'Frameworks and Libraries',
+    summary: 'Comfortable shipping with both research and production-facing Python tooling.',
+    items: [
+      'PyTorch',
+      'TensorFlow',
+      'Scikit-learn',
+      'Hugging Face Transformers',
+      'OpenCV',
+      'Streamlit',
+    ],
   },
   {
-    title: "Tools & Technologies",
-    skills: [
-      { name: "Git & GitHub", level: 90, icon: "📚" },
-      { name: "Docker", level: 80, icon: "🐳" },
-      { name: "Jupyter", level: 95, icon: "📓" },
-      { name: "MLflow", level: 85, icon: "📈" },
-      { name: "Streamlit", level: 90, icon: "⚡" },
-      { name: "FastAPI", level: 85, icon: "🚀" },
-      { name: "AWS", level: 75, icon: "☁️" },
-      { name: "Linux", level: 85, icon: "🐧" }
-    ]
+    title: 'Data and MLOps',
+    summary: 'Pipeline building, experimentation, and reproducible data handling are core strengths.',
+    items: [
+      'NumPy',
+      'Pandas',
+      'ML Pipelines',
+      'Experiment Tracking',
+      'Vector Search',
+      'REST APIs',
+    ],
   },
-  {
-    title: "Data & Analytics",
-    skills: [
-      { name: "Data Analysis", level: 95, icon: "📊" },
-      { name: "Statistical Modeling", level: 88, icon: "📉" },
-      { name: "Data Visualization", level: 90, icon: "📈" },
-      { name: "Feature Engineering", level: 92, icon: "🔧" },
-      { name: "A/B Testing", level: 80, icon: "🧪" },
-      { name: "Time Series Analysis", level: 75, icon: "⏰" }
-    ]
-  },
-  {
-    title: "Research & Development",
-    skills: [
-      { name: "Research Methodology", level: 90, icon: "🔬" },
-      { name: "Paper Writing", level: 85, icon: "📝" },
-      { name: "Experimental Design", level: 88, icon: "🧪" },
-      { name: "Literature Review", level: 90, icon: "📚" },
-      { name: "Peer Review", level: 80, icon: "👥" },
-      { name: "Conference Presentations", level: 85, icon: "🎤" }
-    ]
-  }
 ];
 
-export const certifications = [
+export const toolbelt = [
   {
-    name: "Deep Learning Specialization",
-    issuer: "Coursera - DeepLearning.AI",
-    date: "2023",
-    credentialId: "ABC123",
-    link: "https://coursera.org/verify/ABC123"
+    label: 'Languages',
+    items: ['Python', 'C++', 'SQL', 'Java', 'LaTeX'],
   },
   {
-    name: "AWS Machine Learning Specialty",
-    issuer: "Amazon Web Services",
-    date: "2023",
-    credentialId: "DEF456",
-    link: "https://aws.amazon.com/verification"
+    label: 'Retrieval Stack',
+    items: ['Pinecone', 'FAISS', 'Embeddings', 'Semantic Search'],
   },
   {
-    name: "TensorFlow Developer Certificate",
-    issuer: "Google",
-    date: "2022",
-    credentialId: "GHI789",
-    link: "https://www.credential.net/verify"
-  }
+    label: 'Research Workflow',
+    items: ['Literature Review', 'Experimental Design', 'Benchmarking', 'Technical Writing'],
+  },
+  {
+    label: 'Shipping Surface',
+    items: ['Flask', 'Streamlit', 'Git', 'API Integration'],
+  },
 ];
 
-export const achievements = [
-  {
-    title: "Research Paper Published",
-    description: "Published research on optimization techniques in top-tier ML conference",
-    date: "2023",
-    icon: "🏆"
-  },
-  {
-    title: "Hackathon Winner",
-    description: "First place in AI/ML hackathon with innovative RAG solution",
-    date: "2023",
-    icon: "🥇"
-  },
-  {
-    title: "Dean's List",
-    description: "Academic excellence recognition for consecutive semesters",
-    date: "2022-2023",
-    icon: "🎓"
-  }
+export const workingStyle = [
+  'Translate research findings into concrete engineering decisions and measurable prototypes.',
+  'Bias toward reproducible data preparation, evaluation, and technical documentation.',
+  'Enjoy projects where experimentation, product thinking, and communication all matter.',
 ];

@@ -1,279 +1,356 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiGithub, FiExternalLink, FiEye, FiFilter } from 'react-icons/fi';
-import { projects, projectCategories } from '@/data/projects';
+import { useMemo, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { FiArrowUpRight, FiGithub, FiLink2, FiPlayCircle } from 'react-icons/fi';
+import {
+  archiveCategories,
+  archiveProjects,
+  featuredProjects,
+  type Project,
+  type ProjectAccent,
+  type ProjectLinkKind,
+} from '@/data/projects';
 
-const Projects = () => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [selectedProject, setSelectedProject] = useState(null);
+const accentStyles: Record<ProjectAccent, { border: string; glow: string; text: string }> = {
+  cyan: {
+    border: 'border-signal-400/30',
+    glow: 'shadow-[0_0_0_1px_rgba(84,217,232,0.08),0_24px_80px_rgba(26,182,200,0.18)]',
+    text: 'text-signal-300',
+  },
+  amber: {
+    border: 'border-ember-400/30',
+    glow: 'shadow-[0_0_0_1px_rgba(239,178,86,0.08),0_24px_80px_rgba(222,138,29,0.18)]',
+    text: 'text-ember-300',
+  },
+  rose: {
+    border: 'border-rose-400/30',
+    glow: 'shadow-[0_0_0_1px_rgba(235,116,132,0.08),0_24px_80px_rgba(214,69,98,0.18)]',
+    text: 'text-rose-300',
+  },
+  emerald: {
+    border: 'border-emerald-400/30',
+    glow: 'shadow-[0_0_0_1px_rgba(68,195,142,0.08),0_24px_80px_rgba(28,155,103,0.18)]',
+    text: 'text-emerald-300',
+  },
+};
 
-  const filteredProjects = selectedCategory === 'All' 
-    ? projects 
-    : projects.filter(project => project.category === selectedCategory);
+const linkIcons: Record<ProjectLinkKind, JSX.Element> = {
+  github: <FiGithub size={16} />,
+  live: <FiArrowUpRight size={16} />,
+  linkedin: <FiPlayCircle size={16} />,
+  demo: <FiLink2 size={16} />,
+};
 
-  const ProjectCard = ({ project, index }) => (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 50 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="card hover-glow group cursor-pointer"
-      onClick={() => setSelectedProject(project)}
+const ArchiveVisual = ({ project }: { project: Project }) => {
+  const accent = accentStyles[project.accent];
+
+  return (
+    <div
+      className={`relative overflow-hidden rounded-[28px] border ${accent.border} bg-[linear-gradient(160deg,rgba(9,17,31,0.96),rgba(9,17,31,0.72))] p-6 ${accent.glow}`}
     >
-      <div className="relative overflow-hidden rounded-lg mb-4">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop&crop=entropy&auto=format&fm=webp&q=80`;
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <FiEye className="text-white text-xl" />
-        </div>
-        {project.featured && (
-          <div className="absolute top-4 left-4 bg-blue-600 text-white px-2 py-1 rounded-md text-xs font-medium">
-            Featured
-          </div>
-        )}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_45%)]" />
+      <div className="relative">
+        <p className={`text-xs uppercase tracking-[0.24em] ${accent.text}`}>{project.category}</p>
+        <h3 className="mt-3 font-display text-2xl text-white">{project.title}</h3>
+        <p className="mt-2 text-sm text-slate-400">{project.period}</p>
       </div>
-
-      <div className="space-y-3">
-        <div className="flex items-start justify-between">
-          <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
-            {project.title}
-          </h3>
-          <span className="text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded">
-            {project.category}
-          </span>
-        </div>
-
-        <p className="text-gray-300 text-sm leading-relaxed line-clamp-3">
-          {project.description}
-        </p>
-
-        <div className="flex flex-wrap gap-1">
-          {project.technologies.slice(0, 4).map((tech) => (
-            <span
-              key={tech}
-              className="px-2 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-md"
-            >
-              {tech}
-            </span>
-          ))}
-          {project.technologies.length > 4 && (
-            <span className="px-2 py-1 bg-gray-700 text-gray-300 text-xs rounded-md">
-              +{project.technologies.length - 4} more
-            </span>
-          )}
-        </div>
-
-        <div className="flex items-center space-x-3 pt-2">
-          {project.links.github && (
-            <a
-              href={project.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="flex items-center space-x-1 text-gray-400 hover:text-white transition-colors"
-            >
-              <FiGithub size={16} />
-              <span className="text-sm">Code</span>
-            </a>
-          )}
-          {project.links.live && (
-            <a
-              href={project.links.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="flex items-center space-x-1 text-gray-400 hover:text-blue-400 transition-colors"
-            >
-              <FiExternalLink size={16} />
-              <span className="text-sm">Live Demo</span>
-            </a>
-          )}
-        </div>
-      </div>
-    </motion.div>
+    </div>
   );
+};
 
-  const ProjectModal = ({ project, onClose }) => (
+const FeaturedProjectStage = ({ project }: { project: Project }) => {
+  const accent = accentStyles[project.accent];
+
+  return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-      onClick={onClose}
+      key={project.id}
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -24 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
+      className="space-y-6"
     >
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        transition={{ duration: 0.3 }}
-        className="bg-gray-900 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="relative">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-64 object-cover rounded-t-xl"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop&crop=entropy&auto=format&fm=webp&q=80`;
-            }}
-          />
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
-          >
-            ✕
-          </button>
+      <div className={`project-preview ${accent.border} ${accent.glow}`}>
+        <div className="project-preview__header">
+          <div>
+            <p className={`text-xs uppercase tracking-[0.24em] ${accent.text}`}>{project.eyebrow}</p>
+            <h3 className="mt-3 font-display text-3xl text-white md:text-4xl">{project.title}</h3>
+          </div>
+          <div className="text-right">
+            <p className="text-xs uppercase tracking-[0.22em] text-slate-500">{project.category}</p>
+            <p className="mt-2 text-sm font-medium text-slate-300">{project.period}</p>
+          </div>
         </div>
 
-        <div className="p-8">
-          <div className="flex items-start justify-between mb-4">
-            <h2 className="text-3xl font-bold text-white">{project.title}</h2>
-            <span className="text-sm text-gray-400 bg-gray-800 px-3 py-1 rounded">
-              {project.category}
-            </span>
-          </div>
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,0.92fr)_minmax(320px,1.08fr)]">
+          <div className="space-y-6">
+            <p className="text-base leading-7 text-slate-300">{project.summary}</p>
+            <p className="text-sm leading-7 text-slate-400">{project.narrative}</p>
 
-          <p className="text-gray-300 text-lg leading-relaxed mb-6">
-            {project.longDescription}
-          </p>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {project.metrics.map((metric) => (
+                <div key={metric.label} className="rounded-[24px] border border-white/8 bg-black/20 p-4">
+                  <p className="text-xs uppercase tracking-[0.22em] text-slate-500">{metric.label}</p>
+                  <p className="mt-3 text-sm font-semibold text-white">{metric.value}</p>
+                </div>
+              ))}
+            </div>
 
-          <div className="mb-6">
-            <h3 className="text-xl font-semibold text-white mb-3">Key Highlights</h3>
-            <ul className="space-y-2">
-              {project.highlights.map((highlight, index) => (
-                <li key={index} className="flex items-start space-x-2 text-gray-300">
-                  <span className="text-blue-400 mt-1">•</span>
-                  <span>{highlight}</span>
+            <div className="rounded-[28px] border border-white/10 bg-black/20 p-6">
+              <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Role and outcome</p>
+              <p className="mt-4 text-sm leading-7 text-slate-300">{project.role}</p>
+              <p className="mt-4 text-sm leading-7 text-slate-400">{project.outcome}</p>
+            </div>
+
+            <ul className="space-y-3 text-sm leading-6 text-slate-300">
+              {project.bullets.map((bullet) => (
+                <li key={bullet} className="flex gap-3">
+                  <span className={`mt-2 h-1.5 w-1.5 rounded-full ${accent.text.replace('text', 'bg')}`} />
+                  <span>{bullet}</span>
                 </li>
               ))}
             </ul>
-          </div>
 
-          <div className="mb-6">
-            <h3 className="text-xl font-semibold text-white mb-3">Technologies Used</h3>
+            <div className="flex flex-wrap gap-3">
+              {project.proofLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-secondary text-sm"
+                >
+                  {linkIcons[link.kind]}
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-md"
-                >
+                <span key={tech} className="chip chip--muted">
                   {tech}
                 </span>
               ))}
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-4">
-            {project.links.github && (
-              <a
-                href={project.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary flex items-center space-x-2"
-              >
-                <FiGithub size={18} />
-                <span>View Code</span>
-              </a>
-            )}
-            {project.links.live && (
-              <a
-                href={project.links.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary flex items-center space-x-2"
-              >
-                <FiExternalLink size={18} />
-                <span>Live Demo</span>
-              </a>
-            )}
-            {project.links.demo && project.links.demo !== project.links.live && (
-              <a
-                href={project.links.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary flex items-center space-x-2"
-              >
-                <FiEye size={18} />
-                <span>Demo</span>
-              </a>
+          <div>
+            {project.embed ? (
+              <div className="project-embed-frame">
+                <iframe
+                  src={project.embed.embedUrl}
+                  title={project.embed.title}
+                  loading="lazy"
+                  className="h-[520px] w-full rounded-[24px] border-0 bg-white md:h-[620px]"
+                />
+              </div>
+            ) : (
+              <div className="project-proof-card h-full">
+                <p className={`text-xs uppercase tracking-[0.24em] ${accent.text}`}>Proof surface</p>
+                <h4 className="mt-4 font-display text-3xl text-white">{project.title}</h4>
+                <p className="mt-4 text-sm leading-7 text-slate-300">{project.outcome}</p>
+
+                <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                  {project.metrics.map((metric) => (
+                    <div key={metric.label} className="rounded-[22px] border border-white/8 bg-black/20 p-4">
+                      <p className="text-xs uppercase tracking-[0.22em] text-slate-500">{metric.label}</p>
+                      <p className="mt-3 text-sm font-semibold text-white">{metric.value}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 flex flex-wrap gap-2">
+                  {project.proofLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="button-ghost text-sm"
+                    >
+                      {linkIcons[link.kind]}
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
+};
+
+const Projects = () => {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [activeFeaturedId, setActiveFeaturedId] = useState(featuredProjects[0]?.id ?? '');
+  const shouldReduceMotion = useReducedMotion();
+
+  const activeFeaturedProject =
+    featuredProjects.find((project) => project.id === activeFeaturedId) ?? featuredProjects[0];
+
+  const filteredArchive = useMemo(() => {
+    if (selectedCategory === 'All') {
+      return archiveProjects;
+    }
+
+    return archiveProjects.filter((project) => project.category === selectedCategory);
+  }, [selectedCategory]);
+  const itemHover = shouldReduceMotion ? undefined : { y: -6, scale: 1.01 };
 
   return (
-    <section id="projects" className="section-padding bg-black/20">
-      <div className="container-width">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-section-title gradient-text mb-6">Featured Projects</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            A showcase of my work in AI, machine learning, and software development
+    <section id="projects" className="section-block">
+      <div className="section-shell">
+        <div className="max-w-3xl">
+          <div className="eyebrow">Selected work</div>
+          <h2 className="section-title mt-4">
+            Featured work now lives in an interactive project stage instead of a long scroll.
+          </h2>
+          <p className="section-copy mt-5">
+            Hover, focus, or tap a project name to swap the case study on the right. The goal here
+            is to make the portfolio feel more like a guided presentation than a stack of repeated
+            sections.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Category Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="flex items-center justify-center mb-12"
-        >
-          <div className="flex items-center space-x-4 bg-gray-800/50 rounded-lg p-2">
-            <FiFilter className="text-gray-400" />
+        <div className="mt-12 grid gap-8 xl:grid-cols-[minmax(280px,0.62fr)_minmax(0,1.38fr)]">
+          <div className="xl:sticky xl:top-28 xl:self-start">
+            <div className="surface-card space-y-3">
+              <div className="flex items-center justify-between gap-4">
+                <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Featured case studies</p>
+                <span className="label">Hover or click</span>
+              </div>
+
+              <div className="space-y-3">
+                {featuredProjects.map((project, index) => {
+                  const accent = accentStyles[project.accent];
+                  const isActive = project.id === activeFeaturedProject.id;
+
+                  return (
+                    <motion.button
+                      key={project.id}
+                      type="button"
+                      onClick={() => setActiveFeaturedId(project.id)}
+                      onMouseEnter={() => setActiveFeaturedId(project.id)}
+                      onFocus={() => setActiveFeaturedId(project.id)}
+                      className={`w-full rounded-[28px] border p-5 text-left transition ${
+                        isActive
+                          ? `${accent.border} bg-white/[0.06] ${accent.glow}`
+                          : 'border-white/10 bg-black/20 hover:border-white/20 hover:bg-white/[0.05]'
+                      }`}
+                      whileHover={itemHover}
+                      whileTap={shouldReduceMotion ? undefined : { scale: 0.995 }}
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <p className="text-xs uppercase tracking-[0.24em] text-slate-500">
+                            {String(index + 1).padStart(2, '0')}
+                          </p>
+                          <h3 className="mt-3 font-display text-2xl text-white">{project.title}</h3>
+                        </div>
+                        <span className={`text-xs uppercase tracking-[0.22em] ${accent.text}`}>
+                          {project.category}
+                        </span>
+                      </div>
+
+                      <p className="mt-4 text-sm leading-6 text-slate-300">{project.summary}</p>
+
+                      <div className="mt-4 flex flex-wrap items-center gap-2">
+                        {project.proofLinks.slice(0, 2).map((link) => (
+                          <span key={link.href} className="chip chip--muted">
+                            {link.label}
+                          </span>
+                        ))}
+                      </div>
+                    </motion.button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <AnimatePresence mode="wait" initial={!shouldReduceMotion}>
+              {activeFeaturedProject && <FeaturedProjectStage project={activeFeaturedProject} />}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        <div className="mt-24">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <div className="eyebrow">Archive</div>
+              <h3 className="mt-4 font-display text-3xl text-white md:text-4xl">
+                Additional builds across ML, web, algorithms, and interactive systems.
+              </h3>
+            </div>
+
             <div className="flex flex-wrap gap-2">
-              {projectCategories.map((category) => (
+              {archiveCategories.map((category) => (
                 <button
                   key={category}
+                  type="button"
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-md transition-all duration-300 ${
-                    selectedCategory === category
-                      ? 'bg-blue-600 text-white'
-                      : 'text-gray-300 hover:text-white hover:bg-gray-700'
-                  }`}
+                  className={`nav-pill ${selectedCategory === category ? 'nav-pill--active' : ''}`}
                 >
                   {category}
                 </button>
               ))}
             </div>
           </div>
-        </motion.div>
 
-        {/* Projects Grid */}
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence>
-            {filteredProjects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {filteredArchive.map((project) => (
+              <motion.article
+                key={project.id}
+                layout
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                viewport={{ once: true, amount: 0.25 }}
+                className="surface-card flex h-full flex-col"
+                whileHover={itemHover}
+              >
+                <ArchiveVisual project={project} />
+
+                <div className="mt-6 flex-1">
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="label">{project.category}</span>
+                    <span className="text-xs uppercase tracking-[0.22em] text-slate-500">
+                      {project.period}
+                    </span>
+                  </div>
+
+                  <p className="mt-4 text-sm leading-7 text-slate-300">{project.summary}</p>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {project.technologies.slice(0, 4).map((tech) => (
+                      <span key={tech} className="chip chip--muted">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {project.proofLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="button-ghost text-sm"
+                    >
+                      {linkIcons[link.kind]}
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </motion.article>
             ))}
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Project Modal */}
-        <AnimatePresence>
-          {selectedProject && (
-            <ProjectModal
-              project={selectedProject}
-              onClose={() => setSelectedProject(null)}
-            />
-          )}
-        </AnimatePresence>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,149 +1,182 @@
-import React, { useState, useEffect } from 'react';
-import { FiMenu, FiX, FiHome, FiUser, FiCode, FiFolder, FiMail } from 'react-icons/fi';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { motion, useReducedMotion, useScroll } from 'framer-motion';
+import { FiArrowUpRight, FiMenu, FiX } from 'react-icons/fi';
+import { personalInfo } from '@/data/personal';
+
+const navItems = [
+  { id: 'hero', label: 'Overview' },
+  { id: 'story', label: 'Story' },
+  { id: 'projects', label: 'Work' },
+  { id: 'skills', label: 'Toolkit' },
+  { id: 'contact', label: 'Contact' },
+];
 
 const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-
-  const navItems = [
-    { id: 'hero', label: 'Home', icon: FiHome },
-    { id: 'about', label: 'About', icon: FiUser },
-    { id: 'skills', label: 'Skills', icon: FiCode },
-    { id: 'projects', label: 'Projects', icon: FiFolder },
-    { id: 'contact', label: 'Contact', icon: FiMail },
-  ];
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems.map(item => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + 100;
+      setIsScrolled(window.scrollY > 32);
 
-      sections.forEach((section, index) => {
-        if (section) {
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.offsetHeight;
-          
-          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            setActiveSection(navItems[index].id);
-          }
+      const checkpoint = window.scrollY + window.innerHeight * 0.35;
+
+      for (const item of navItems) {
+        const section = document.getElementById(item.id);
+
+        if (!section) {
+          continue;
         }
-      });
+
+        const top = section.offsetTop;
+        const bottom = top + section.offsetHeight;
+
+        if (checkpoint >= top && checkpoint < bottom) {
+          setActiveSection(item.id);
+          break;
+        }
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    const section = document.getElementById(sectionId);
+
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+
     setIsOpen(false);
   };
 
   return (
     <>
-      {/* Desktop Navigation */}
-      <motion.nav 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-2xl font-bold gradient-text"
-            >
-              NR
-            </motion.div>
+      <motion.div
+        className="fixed left-0 right-0 top-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-signal-400 via-ember-400 to-rose-400"
+        style={shouldReduceMotion ? undefined : { scaleX: scrollYProgress }}
+      />
 
-            {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8">
-              {navItems.map((item, index) => (
-                <motion.button
+      <nav className={`site-nav ${isScrolled ? 'site-nav--scrolled' : ''}`}>
+        <div className="section-shell flex items-center justify-between gap-4 py-4">
+          <button
+            type="button"
+            onClick={() => scrollToSection('hero')}
+            className="flex items-center gap-3 text-left"
+            aria-label="Go to top of page"
+          >
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 font-display text-sm font-semibold text-white">
+              {personalInfo.initials}
+            </span>
+            <span className="hidden sm:block">
+              <span className="block text-xs uppercase tracking-[0.28em] text-slate-400">
+                Portfolio
+              </span>
+              <span className="block text-sm font-semibold text-white">{personalInfo.name}</span>
+            </span>
+          </button>
+
+          <div className="hidden items-center gap-2 lg:flex">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => scrollToSection(item.id)}
+                className={`nav-pill ${activeSection === item.id ? 'nav-pill--active' : ''}`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="hidden items-center gap-3 sm:flex">
+            <a
+              href={personalInfo.resume}
+              download="Niloy-Rahman-Resume.pdf"
+              className="button-ghost text-sm"
+            >
+              Resume
+            </a>
+            <a
+              href={personalInfo.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button-secondary text-sm"
+            >
+              LinkedIn
+              <FiArrowUpRight />
+            </a>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setIsOpen((open) => !open)}
+            className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white lg:hidden"
+            aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          >
+            {isOpen ? <FiX size={20} /> : <FiMenu size={20} />}
+          </button>
+        </div>
+      </nav>
+
+      {isOpen && (
+        <div className="fixed inset-0 z-50 bg-[#050814]/90 backdrop-blur-xl lg:hidden">
+          <div className="section-shell flex min-h-screen flex-col gap-10 py-8">
+            <div className="flex items-center justify-between">
+              <span className="text-sm uppercase tracking-[0.26em] text-slate-400">Navigate</span>
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white"
+                aria-label="Close navigation menu"
+              >
+                <FiX size={20} />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              {navItems.map((item) => (
+                <button
                   key={item.id}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
+                  type="button"
                   onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 ${
-                    activeSection === item.id 
-                      ? 'bg-blue-600 text-white' 
-                      : 'text-gray-300 hover:text-white hover:bg-white/10'
+                  className={`nav-pill justify-between px-5 py-4 text-base ${
+                    activeSection === item.id ? 'nav-pill--active' : ''
                   }`}
                 >
-                  <item.icon size={18} />
                   <span>{item.label}</span>
-                </motion.button>
+                  <FiArrowUpRight size={18} />
+                </button>
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10"
-            >
-              {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-            </motion.button>
+            <div className="mt-auto flex flex-col gap-3">
+              <a
+                href={personalInfo.resume}
+                download="Niloy-Rahman-Resume.pdf"
+                className="button-primary justify-center"
+              >
+                Download Resume
+              </a>
+              <a
+                href={personalInfo.socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button-secondary justify-center"
+              >
+                GitHub
+                <FiArrowUpRight />
+              </a>
+            </div>
           </div>
         </div>
-      </motion.nav>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ duration: 0.3 }}
-            className="fixed top-16 right-0 bottom-0 w-64 bg-black/90 backdrop-blur-md border-l border-white/10 z-40 md:hidden"
-          >
-            <div className="p-6 space-y-4">
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.id}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center space-x-3 w-full p-3 rounded-lg transition-all duration-300 ${
-                    activeSection === item.id 
-                      ? 'bg-blue-600 text-white' 
-                      : 'text-gray-300 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  <item.icon size={20} />
-                  <span>{item.label}</span>
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsOpen(false)}
-            className="fixed inset-0 bg-black/50 z-30 md:hidden"
-          />
-        )}
-      </AnimatePresence>
+      )}
     </>
   );
 };
