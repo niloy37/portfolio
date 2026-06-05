@@ -17,12 +17,11 @@ const Skills = () => {
         >
           <div className="eyebrow">Toolkit</div>
           <h2 className="section-title mt-4">
-            What I reach for when the work needs to move from idea to implementation.
+            Tools I use across retrieval, modeling, evaluation, and demos.
           </h2>
           <p className="section-copy mt-5">
-            The strongest through-line in my work is not a single framework. It is the ability to
-            connect research questions, clean pipelines, and usable interfaces into one coherent
-            system.
+            My strongest work connects research questions with data preparation, evaluation code,
+            APIs, and interfaces that make the results easier to inspect.
           </p>
         </motion.div>
 

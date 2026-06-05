@@ -28,16 +28,17 @@ const About = () => {
         >
           <div className="eyebrow">Story and trajectory</div>
           <h2 className="section-title mt-4">
-            A portfolio built around research depth and practical delivery.
+            From backend delivery to applied ML and research.
           </h2>
           <p className="section-copy mt-6">
             My path has moved from backend support and software delivery into applied ML internships
-            and now research work on LLM evaluation. That combination shows up in how I build:
-            clear pipelines, usable interfaces, and experiments that can stand up to scrutiny.
+            and research work on LLM evaluation. That combination shows up in the projects here:
+            data pipelines, reviewable interfaces, and experiments with visible inputs and outputs.
           </p>
           <p className="section-copy mt-4">
-            I enjoy projects where retrieval, modeling, data preparation, and communication all
-            matter because the best AI work is rarely just about training a model.
+            I enjoy work where retrieval, modeling, data preparation, and communication all matter:
+            remote-job verification, RAG chatbots, resume parsing, live inference dashboards, and
+            medical imaging research.
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-1">

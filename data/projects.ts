@@ -83,6 +83,52 @@ const ddosLinkedIn =
 
 export const projects: Project[] = [
   {
+    id: 'remote-trust-ai',
+    title: 'RemoteTrust AI',
+    eyebrow: 'Newest case study',
+    summary:
+      'A full-stack remote-job trust platform that helps global applicants check whether a role is real, actually remote, country-accessible, and worth applying to.',
+    narrative:
+      'RemoteTrust AI accepts a public job URL or pasted job description, extracts job and company signals, checks the posting against applicant country context, and returns an explainable trust decision before the applicant spends time applying.',
+    role:
+      'Built the analyzer UI, FastAPI backend, local scoring pipeline, saved-results dashboard, curated opportunity feed, persistence layer, and Chrome extension prototype.',
+    category: 'Trustworthy AI',
+    period: '2026',
+    status: 'Live app + GitHub repo',
+    accent: 'emerald',
+    featured: true,
+    technologies: [
+      'Next.js 15',
+      'React 19',
+      'TypeScript',
+      'FastAPI',
+      'SQLite',
+      'DuckDB',
+      'Parquet',
+      'Neo4j',
+      'Docker Compose',
+      'Manifest V3',
+    ],
+    metrics: [
+      { label: 'Scoring', value: '4 trust pillars' },
+      { label: 'Classifier', value: '5 job labels' },
+      { label: 'Workflow', value: 'Analyze + dashboard + feed' },
+    ],
+    outcome:
+      'Turns messy remote-job postings into a trust score, verdict, recommendation, red flags, positive signals, extracted details, title validation, company evidence, graph evidence, and applicant feedback history.',
+    bullets: [
+      'Scores legitimacy, remote authenticity, global eligibility, and job quality with a local-first rules and feature-extraction pipeline.',
+      'Classifies postings as legitimate remote, country-restricted, hybrid/location-bound, low-quality unverified, or likely scam.',
+      'Supports URL or pasted-text analysis, saved result pages, dashboard filtering, and feedback capture.',
+      'Adds DuckDB/Parquet ingestion for curated opportunities plus optional Neo4j graph verification with SQLite fallback.',
+      'Includes a consent-based Chrome extension prototype for supported job pages that are difficult for backend crawling.',
+    ],
+    proofLinks: [
+      { label: 'Live app', href: 'https://remote-trust-ai.vercel.app/', kind: 'live' },
+      { label: 'GitHub', href: 'https://github.com/niloy37/remote-trust-ai', kind: 'github' },
+    ],
+  },
+  {
     id: 'rag-medical-chatbot',
     title: 'Medical RAG Chatbot',
     eyebrow: 'Featured case study',
@@ -107,7 +153,7 @@ export const projects: Project[] = [
     bullets: [
       'Converts documents into embeddings and stores them in Pinecone for semantic lookup.',
       'Retrieves the most relevant chunks before answer generation to keep responses tied to source material.',
-      'Packages the full flow into a usable chatbot experience instead of leaving it as a notebook prototype.',
+      'Wraps ingestion, retrieval, and response generation in a Flask chatbot that can be tested end to end.',
     ],
     proofLinks: [
       { label: 'GitHub', href: 'https://github.com/niloy37/chatbotAI', kind: 'github' },
@@ -116,7 +162,7 @@ export const projects: Project[] = [
     embed: buildLinkedInEmbed(
       ragLinkedIn,
       'Medical RAG Chatbot walkthrough',
-      'Official LinkedIn embed'
+      'LinkedIn project walkthrough'
     ),
   },
   {
@@ -127,7 +173,7 @@ export const projects: Project[] = [
       'Explainable resume screening system that combines NLP extraction with rule-based candidate evaluation.',
     narrative:
       'Built around spaCy and a rule-based inference layer, this project parses resumes from multiple formats and produces structured signals, candidate scoring, and transparent HIRE / CONSIDER / REJECT style outputs.',
-    role: 'Designed the parsing flow, inference logic, and demo-ready interface.',
+    role: 'Designed the parsing flow, rule logic, and drag-and-drop demo interface.',
     category: 'NLP',
     period: '2025',
     status: 'LinkedIn walkthrough + GitHub repo',
@@ -144,7 +190,7 @@ export const projects: Project[] = [
     bullets: [
       'Extracts entities such as skills and experience using NLP rather than relying only on brittle string matching.',
       'Uses explicit rule logic to keep hiring decisions interpretable for human review.',
-      'Packages the pipeline in a polished UI suitable for demonstrations and screening workflows.',
+      'Presents extracted skills, experience, and recommendation labels in a reviewable interface.',
     ],
     proofLinks: [
       {
@@ -157,7 +203,7 @@ export const projects: Project[] = [
     embed: buildLinkedInEmbed(
       resumeParserLinkedIn,
       'Resume parser walkthrough',
-      'Official LinkedIn embed'
+      'LinkedIn project walkthrough'
     ),
   },
   {
@@ -181,11 +227,11 @@ export const projects: Project[] = [
       { label: 'Latency', value: 'Sub-ms prediction' },
     ],
     outcome:
-      'Combines offline model quality with an operational interface that makes the output usable in real time.',
+      'Connects trained model performance to a dashboard that shows live traffic context and prediction confidence.',
     bullets: [
       'Captures and processes live network traffic rather than limiting the project to offline evaluation.',
       'Uses XGBoost for strong tabular performance on security signals.',
-      'Surfaces inference confidence and traffic context through a dashboard suitable for demonstrations.',
+      'Surfaces prediction confidence and traffic context through the Flask dashboard.',
     ],
     proofLinks: [
       {
@@ -198,7 +244,7 @@ export const projects: Project[] = [
     embed: buildLinkedInEmbed(
       ddosLinkedIn,
       'Real-time DDoS detection walkthrough',
-      'Official LinkedIn embed'
+      'LinkedIn project walkthrough'
     ),
   },
   {
@@ -351,7 +397,7 @@ export const projects: Project[] = [
       { label: 'Engine', value: 'Unity' },
       { label: 'Focus', value: 'Physics simulation' },
     ],
-    outcome: 'A good example of building polished interaction systems outside the AI space.',
+    outcome: 'Shows hands-on C# gameplay work outside the AI/ML portfolio track.',
     bullets: [
       'Implemented turn management, controls, and playable AI support.',
       'Focused on tactile board physics and replayable local gameplay.',

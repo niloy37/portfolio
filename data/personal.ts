@@ -1,26 +1,27 @@
 export const siteConfig = {
   siteUrl: 'https://niloy37.github.io/portfolio',
   ogImage: 'https://niloy37.github.io/portfolio/og-image.svg',
-  tagline: 'AI/ML engineer and research-driven builder shipping LLM, retrieval, and applied ML systems.',
+  tagline: 'AI/ML engineer building trustworthy AI, retrieval, NLP, computer vision, and applied ML systems.',
 };
 
 export const personalInfo = {
   name: 'Niloy Rahman',
   initials: 'NR',
-  headline: 'AI/ML Engineer for LLM Systems, Retrieval, and Applied Research',
+  headline: 'AI/ML Engineer for Trustworthy AI, Retrieval, and Applied Research',
   subtitle:
-    'MSc Computational Sciences candidate building production-minded AI products with research depth in NLP, computer vision, and evaluation.',
+    'MSc Computational Sciences candidate turning remote-job trust scoring, RAG, resume parsing, DDoS detection, and medical imaging work into usable software.',
   location: 'Toronto, Ontario, Canada',
   email: 'niloyrahman1337@gmail.com',
   phone: '+1 705-921-9299',
   resume: 'assets/resume.pdf',
   availability:
-    'Open to AI/ML engineering, applied research, and platform roles where rigorous experimentation meets real product delivery.',
+    'Open to AI/ML engineering, applied research, and platform roles that need careful experiments and working software.',
   bio: [
-    'I work at the intersection of research and product, translating experiments in LLMs, embeddings, and model evaluation into usable systems.',
-    'Recent work spans RAG pipelines, explainable NLP tooling, cybersecurity inference pipelines, and medical imaging research, with a strong bias toward reproducibility and clear technical communication.',
+    'I build AI systems around concrete evidence: remote-job trust signals, retrieved source context, extracted resume signals, network-flow features, and medical image experiments.',
+    'Recent work includes RemoteTrust AI for global job seekers, RAG pipelines, explainable NLP tooling, cybersecurity inference dashboards, and medical imaging research, with an emphasis on reproducible experiments and clear technical communication.',
   ],
   focusAreas: [
+    'Trustworthy AI',
     'LLMs and RAG',
     'Benchmarking and Evaluation',
     'NLP and Knowledge Systems',
@@ -29,10 +30,10 @@ export const personalInfo = {
     'Research Communication',
   ],
   proofStrip: [
+    { label: 'Latest', value: 'RemoteTrust AI job verification platform' },
     { label: 'Current', value: 'Research Assistant @ NeXNet Lab' },
     { label: 'Recent', value: 'ML Engineer Intern @ Sequencr AI' },
     { label: 'Education', value: 'MSc Computational Sciences' },
-    { label: 'Strength', value: 'Research + shipping mindset' },
   ],
   socials: {
     github: 'https://github.com/niloy37',
@@ -66,7 +67,7 @@ export const experience = [
     bullets: [
       'Built clustering and novelty-scoring pipelines using HDBSCAN, all-MiniLM embeddings, TF-IDF, and vector similarity.',
       'Automated ingestion, preprocessing, and embedding workflows to improve reproducibility and scale.',
-      'Focused on shipping applied ML systems with clear operational handoff instead of only model experimentation.',
+      'Documented the pipeline behavior and handoff details so the work could be reused beyond model experiments.',
     ],
     tags: ['Python', 'Embeddings', 'HDBSCAN', 'Vector Search'],
   },
@@ -94,7 +95,7 @@ export const experience = [
     bullets: [
       'Built validation flows for machine learning pipelines and data integrity checks.',
       'Integrated REST APIs for real-time prediction services and backend workflows.',
-      'Worked across practical software engineering concerns alongside model-facing systems.',
+      'Worked on backend implementation details around model-facing systems.',
     ],
     tags: ['Python', 'REST APIs', 'Data Validation', 'Backend'],
   },

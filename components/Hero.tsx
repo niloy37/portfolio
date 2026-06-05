@@ -46,7 +46,7 @@ const Hero = () => {
               animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
               transition={shouldReduceMotion ? undefined : { duration: 0.45, delay: 0.05 }}
             >
-              Balanced AI engineering and research portfolio
+              AI/ML engineering, retrieval, and applied research
             </motion.div>
 
             <motion.div
@@ -135,7 +135,7 @@ const Hero = () => {
               <div>
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Currently</p>
                 <h2 className="mt-3 font-display text-2xl text-white">
-                  Researching LLM faithfulness while shipping applied AI demos
+                  Researching LLM faithfulness while building applied ML systems
                 </h2>
               </div>
               <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.22em] text-signal-300">
@@ -186,7 +186,7 @@ const Hero = () => {
               className="mt-8 rounded-[28px] border border-white/10 bg-black/20 p-5"
               whileHover={hoverLift}
             >
-              <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Positioning</p>
+              <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Availability</p>
               <p className="mt-3 text-sm leading-6 text-slate-300">{personalInfo.availability}</p>
             </motion.div>
           </motion.aside>
@@ -194,7 +194,7 @@ const Hero = () => {
 
         <div className="mt-16 flex items-center gap-4 text-sm text-slate-400">
           <span className="h-px flex-1 bg-white/10" />
-          <span className="uppercase tracking-[0.28em]">Scroll to follow the story</span>
+          <span className="uppercase tracking-[0.28em]">Selected project evidence and research work</span>
           <span className="h-px flex-1 bg-white/10" />
         </div>
       </div>

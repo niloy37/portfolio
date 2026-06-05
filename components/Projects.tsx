@@ -146,7 +146,7 @@ const FeaturedProjectStage = ({ project }: { project: Project }) => {
               </div>
             ) : (
               <div className="project-proof-card h-full">
-                <p className={`text-xs uppercase tracking-[0.24em] ${accent.text}`}>Proof surface</p>
+                <p className={`text-xs uppercase tracking-[0.24em] ${accent.text}`}>Project proof</p>
                 <h4 className="mt-4 font-display text-3xl text-white">{project.title}</h4>
                 <p className="mt-4 text-sm leading-7 text-slate-300">{project.outcome}</p>
 
@@ -205,12 +205,11 @@ const Projects = () => {
         <div className="max-w-3xl">
           <div className="eyebrow">Selected work</div>
           <h2 className="section-title mt-4">
-            Featured work now lives in an interactive project stage instead of a long scroll.
+            Selected systems with visible inputs, model logic, and proof links.
           </h2>
           <p className="section-copy mt-5">
-            Hover, focus, or tap a project name to swap the case study on the right. The goal here
-            is to make the portfolio feel more like a guided presentation than a stack of repeated
-            sections.
+            These projects emphasize what the system receives, how it processes evidence, and where
+            the implementation can be inspected through repositories, demos, or walkthroughs.
           </p>
         </div>
 

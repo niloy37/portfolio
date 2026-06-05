@@ -168,11 +168,11 @@ const Contact = () => {
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-xs uppercase tracking-[0.22em] text-slate-400">
-                Formspree contact form
+                Direct message
               </p>
               <h3 className="mt-3 font-display text-3xl text-white">Send a message</h3>
             </div>
-            <span className="label">GitHub Pages-safe</span>
+            <span className="label">Replies by email</span>
           </div>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -185,7 +185,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 className="field-input"
-                placeholder="Your name"
+                placeholder="Full name"
               />
             </label>
 
@@ -198,7 +198,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 className="field-input"
-                placeholder="you@example.com"
+                placeholder="name@domain.com"
               />
             </label>
           </div>

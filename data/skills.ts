@@ -5,6 +5,7 @@ export const skillClusters = [
     items: [
       'Machine Learning',
       'Deep Learning',
+      'Trustworthy AI',
       'Computer Vision',
       'Natural Language Processing',
       'Multimodal AI',
@@ -25,7 +26,7 @@ export const skillClusters = [
   },
   {
     title: 'Frameworks and Libraries',
-    summary: 'Comfortable shipping with both research and production-facing Python tooling.',
+    summary: 'Comfortable building research prototypes, APIs, and demo surfaces with Python tooling.',
     items: [
       'PyTorch',
       'TensorFlow',
@@ -69,7 +70,7 @@ export const toolbelt = [
 ];
 
 export const workingStyle = [
-  'Translate research findings into concrete engineering decisions and measurable prototypes.',
-  'Bias toward reproducible data preparation, evaluation, and technical documentation.',
-  'Enjoy projects where experimentation, product thinking, and communication all matter.',
+  'Turn papers, datasets, and experiments into code that can be inspected and rerun.',
+  'Prefer clear data preparation, explicit evaluation metrics, and written handoff notes.',
+  'Like projects where model behavior has to be explained through evidence, not just reported as a score.',
 ];

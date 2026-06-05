@@ -1,23 +1,9 @@
-# Assets Directory
+# Portfolio Assets
 
-This directory contains all the static assets for the portfolio website.
+Static assets used by the portfolio.
 
-## Structure
+- `resume.pdf` - downloadable resume
+- `grid.svg` - decorative grid texture used by the site styles
+- `projects/` - reserved for future real project screenshots
 
-- `/projects/` - Project screenshots and images
-- `/icons/` - Icons and favicons
-- `/resume.pdf` - Resume/CV file
-- `/og-image.jpg` - Open Graph image for social media
-- `/noise.png` - Background texture
-- `/grid.svg` - Grid pattern overlay
-
-## Image Guidelines
-
-- Project images should be 800x600px minimum
-- Use WebP format when possible for better performance
-- Include alt text for accessibility
-- Optimize images before uploading
-
-## Favicon
-
-Generate favicons using a tool like https://favicon.io/ and place them in the `/public` root directory.
+Favicons and the Open Graph preview live in the `public/` root so GitHub Pages can serve them from stable paths.
