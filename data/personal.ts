@@ -9,7 +9,7 @@ export const personalInfo = {
   initials: 'NR',
   headline: 'AI/ML Engineer for Trustworthy AI, Retrieval, and Applied Research',
   subtitle:
-    'MSc Computational Sciences candidate turning remote-job trust scoring, RAG, resume parsing, DDoS detection, and medical imaging work into usable software.',
+    'MSc graduate turning remote-job trust scoring, RAG, resume parsing, DDoS detection, and medical imaging work into usable software.',
   location: 'Toronto, Ontario, Canada',
   email: 'niloyrahman1337@gmail.com',
   phone: '+1 705-921-9299',
